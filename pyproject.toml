@@ -96,6 +96,8 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    # To import setuptools.discovery
+    "setuptools>=61.0.0",
 ]
 
 [project.urls]
