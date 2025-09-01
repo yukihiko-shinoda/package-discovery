@@ -23,6 +23,7 @@ class TestSetuptools:
         ],
     )
     def test_py_modules(self, py_modules: list[str] | None, expected: list[str]) -> None:
+        """The property: py_modules should be set appropriate py modules."""
         setuptools = Setuptools()
         # Reason: For testing pylint: disable=protected-access
         setuptools._py_modules = py_modules  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
@@ -31,7 +32,8 @@ class TestSetuptools:
     def test_packages(self) -> None:
         assert Setuptools().packages, ["packagediscovery"]
 
-    def test_find_py_modules_without_py_modules(self) -> None:
+    def test_modules_to_lint(self) -> None:
+        """The property: py_modules should not be excluded the packages that is set by modules_to_lint."""
         modules_to_lint = [
             "setup",
             "conftest",
