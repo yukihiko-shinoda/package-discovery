@@ -10,6 +10,8 @@ from setuptools.discovery import ConfigDiscovery
 from setuptools.discovery import FlatLayoutModuleFinder
 from setuptools.dist import Distribution
 
+__all__ = ["Setuptools"]
+
 
 class Setuptools:
     """To access dist."""
