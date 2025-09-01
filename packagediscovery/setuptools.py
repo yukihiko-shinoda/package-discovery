@@ -16,23 +16,31 @@ __all__ = ["Setuptools"]
 class Setuptools:
     """To access dist."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, modules_to_lint: list[str] | None = None) -> None:
+        self.modules_to_lint = modules_to_lint or []
         distribution = Distribution()
         distribution.parse_config_files()
-        self.config_discovery = ConfigDiscovery(distribution)
-        self.config_discovery()
+        config_discovery = ConfigDiscovery(distribution)
+        config_discovery()
+        self.dist = config_discovery.dist
+        self._py_modules = self.dist.py_modules
 
     @property
     def packages(self) -> list[str]:
-        return cast("list[str]", self.config_discovery.dist.packages)
+        return cast("list[str]", self.dist.packages)
 
-    def find_py_modules(self, modules_to_lint: list[str]) -> list[str]:
-        if self.config_discovery.dist.py_modules:
-            return cast("list[str]", self.config_discovery.dist.py_modules)
-        exclude = [module for module in FlatLayoutModuleFinder.DEFAULT_EXCLUDE if module not in modules_to_lint]
+    @property
+    def py_modules(self) -> list[str]:
+        if self._py_modules:
+            return cast("list[str]", self._py_modules)
+        self._py_modules = self._find_py_modules()
+        return cast("list[str]", self._py_modules)  # pyright: ignore[reportUnnecessaryCast]
+
+    def _find_py_modules(self) -> list[str]:
+        exclude = [module for module in FlatLayoutModuleFinder.DEFAULT_EXCLUDE if module not in self.modules_to_lint]
         # sorted(): Since Windows returns different order from Linux.
         return sorted(FlatLayoutModuleFinder.find(self.project_root, exclude))
 
     @property
     def project_root(self) -> Path:
-        return Path(self.config_discovery.dist.src_root or os.curdir).resolve()
+        return Path(self.dist.src_root or os.curdir).resolve()

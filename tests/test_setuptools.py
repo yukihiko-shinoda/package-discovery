@@ -1,6 +1,10 @@
 """Tests for setuptools module."""
 
+from __future__ import annotations
+
 from pathlib import Path
+
+import pytest
 
 from packagediscovery.setuptools import Setuptools
 
@@ -11,19 +15,43 @@ class TestSetuptools:
     def test_project_root(self) -> None:
         assert Setuptools().project_root == Path().absolute().resolve()
 
-    def test_find_py_modules(self) -> None:
-        expected = ["invokelint"]
+    @pytest.mark.parametrize(
+        ("py_modules", "expected"),
+        [
+            (["test_module"], ["test_module"]),
+            (None, []),
+        ],
+    )
+    def test_py_modules(self, py_modules: list[str] | None, expected: list[str]) -> None:
         setuptools = Setuptools()
-        setuptools.config_discovery.dist.py_modules = expected
-        assert setuptools.find_py_modules([]) == expected
+        # Reason: For testing pylint: disable=protected-access
+        setuptools._py_modules = py_modules  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
+        assert setuptools.py_modules == expected
 
     def test_packages(self) -> None:
-        setuptools = Setuptools()
-        packages = setuptools.packages
-        assert isinstance(packages, list)
+        assert Setuptools().packages, ["packagediscovery"]
 
     def test_find_py_modules_without_py_modules(self) -> None:
-        setuptools = Setuptools()
-        setuptools.config_discovery.dist.py_modules = None
-        modules = setuptools.find_py_modules(["test_module"])
-        assert isinstance(modules, list)
+        modules_to_lint = [
+            "setup",
+            "conftest",
+            "test",
+            "tests",
+            "example",
+            "examples",
+            # ---- Task runners ----
+            "toxfile",
+            "noxfile",
+            "pavement",
+            "dodo",
+            "tasks",
+            "fabfile",
+            # ---- Other tools ----
+            "conanfile",  # Connan: C/C++ build tool
+            "manage",  # Django
+        ]
+
+        setuptools = Setuptools(modules_to_lint=modules_to_lint)
+        # Reason: For testing pylint: disable=protected-access
+        setuptools._py_modules = None  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
+        assert setuptools.py_modules == ["tasks"]
