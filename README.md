@@ -98,7 +98,7 @@ print(f"Project root = {setuptools.project_root}")
 ### Filter packages to root packages only
 
 ```python
-from packagediscovery import Setuptools
+from packagediscovery import Packages, Setuptools
 
 setuptools = Setuptools()
 print(f"Packages = {setuptools.packages}")
