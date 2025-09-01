@@ -5,7 +5,7 @@ from packagediscovery.setuptools import *  # noqa: F403
 
 __author__ = """Yukihiko Shinoda"""
 __email__ = "yuk.hik.future@gmail.com"
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = []
 __all__ += packages.__all__  # type:ignore[name-defined] # noqa: F405 pylint: disable=undefined-variable
