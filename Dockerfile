@@ -1,4 +1,4 @@
-FROM node:24.4.1-bookworm-slim
+FROM node:26.3.0-bookworm-slim
 WORKDIR /workspace
 RUN npm install -g @anthropic-ai/claude-code@1.0.61
 COPY --from=ghcr.io/astral-sh/uv:0.8.3 /uv /uvx /bin/
