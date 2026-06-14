@@ -62,7 +62,7 @@ dev = [
 
 [project]
 name = "packagediscovery"
-version = "0.2.0"
+version = "0.3.0"
 description = "Package discovery based on Setuptools."
 readme = "README.md"
 requires-python = ">=3.7"
@@ -115,7 +115,7 @@ repository = "https://github.com/yukihiko-shinoda/package-discovery"
 skips = ["tests/*"]
 
 [tool.bumpversion]
-current_version = "0.2.0"
+current_version = "0.3.0"
 commit = true
 tag = true
 
