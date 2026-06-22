@@ -57,7 +57,7 @@ Ready to contribute? Here's how to set up `Package Discovery` for local developm
    git clone git@github.com:your_name_here/package-discovery.git
    ```
 
-3. Install your local copy into a virtualenv. Assuming you have uv installed, this is how you set up your fork for local development:
+3. Set up your local environment. You can use [docker-compose-python-development](https://github.com/yukihiko-shinoda/docker-compose-python-development) or install directly:
 
    ```console
    uv sync
@@ -72,14 +72,13 @@ Ready to contribute? Here's how to set up `Package Discovery` for local developm
    Now you can make your changes locally.
 
 5. When you're done making changes,
-   check that your changes pass Ruff, docformatter,
-   and the tests, including testing oldest Python version:
+   check that your changes pass linters and tests:
 
    ```console
    uv run inv style --check
-   uv run pytest
-   uv install --python 3.7
-   uv run pytest
+   uv run inv lint
+   uv run inv lint.deep
+   uv run inv test.all
    ```
 
 6. Commit your changes and push your branch to GitHub:
@@ -106,8 +105,7 @@ Before you submit a pull request, check that it meets these guidelines:
 To run a subset of tests:
 
 ```console
-uv run pytest tests.test_packagediscovery
-
+uv run pytest tests/test_packagediscovery.py
 ```
 
 ## Deploying
