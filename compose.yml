@@ -1,7 +1,0 @@
-services:
-  package-discovery:
-    build: .
-    image: futureys/package-discovery:development
-    volumes:
-      - .:/workspace
-      - /workspace/.venv
