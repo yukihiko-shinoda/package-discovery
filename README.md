@@ -1,7 +1,7 @@
 # Package Discovery
 
 [![Test](https://github.com/yukihiko-shinoda/package-discovery/workflows/Test/badge.svg)](https://github.com/yukihiko-shinoda/package-discovery/actions?query=workflow%3ATest)
-[![CodeQL](https://github.com/yukihiko-shinoda/package-discovery/workflows/CodeQL/badge.svg)](https://github.com/yukihiko-shinoda/package-discovery/actions?query=workflow%3ACodeQL)
+[![CodeQL](https://github.com/yukihiko-shinoda/package-discovery/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/yukihiko-shinoda/package-discovery/actions/workflows/github-code-scanning/codeql)
 [![Code Coverage](https://qlty.sh/gh/yukihiko-shinoda/projects/package-discovery/coverage.svg)](https://qlty.sh/gh/yukihiko-shinoda/projects/package-discovery)
 [![Maintainability](https://qlty.sh/gh/yukihiko-shinoda/projects/package-discovery/maintainability.svg)](https://qlty.sh/gh/yukihiko-shinoda/projects/package-discovery)
 [![Dependabot](https://flat.badgen.net/github/dependabot/yukihiko-shinoda/package-discovery?icon=dependabot)](https://github.com/yukihiko-shinoda/package-discovery/security/dependabot)
